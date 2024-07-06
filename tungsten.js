@@ -27,10 +27,20 @@ const BAR_DEFAULT_OPT = BAR_TITLE_WIDE | BAR_TITLE_CENTER;
 
 /**
  * 
+ * @param {*} msg 
+ */
+function TDWarning(msg){
+
+}
+
+
+
+/**
+ * 
  * @param {*} str 
  * @returns 
  */
-function capitaliseTitle(str) {
+function TDCapitaliseTitle(str) {
     const cap = (str) => `${str.charAt(0).toUpperCase()}${str.slice(1)}`;
     let words = str.split(" ");
     let capw = words.map((w) => cap(w));
@@ -41,10 +51,10 @@ function capitaliseTitle(str) {
  * 
  * @param {*} width 
  */
-function drawLine(width){
-    let line = "";
+function TDDrawLine(width){
+    let line = "\x1b[32m\x1b[5m";
     for (let x = 0; x < width; x++) ((x == 0) || (x == width-1)) ? line += "+": line += "-";
-    console.log(line);
+    console.log(line, "\x1b[0m");
 }
 
 
@@ -55,7 +65,7 @@ function drawLine(width){
  * @param {*} barOptions 
  * @param {*} boxWidth 
  */
-function DrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
+function TDDrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
     
     let width = boxWidth;
     let str_length = barTitle.length;
@@ -90,7 +100,7 @@ function DrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
             break;
                 
         case BAR_CAP_TITLE:
-            str = capitaliseTitle(barTitle);
+            str = TDCapitaliseTitle(barTitle);
             break;
 
         default:
@@ -116,7 +126,7 @@ function DrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
     }
 
 
-    drawLine(width);
+    TDDrawLine(width);
 
     for (let x = 0; x < width; x++) {
         if((x == 0) || (x == width-1)) {
@@ -129,16 +139,11 @@ function DrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
     }
     console.log(line); line = "";
     
-    drawLine(width);
+    TDDrawLine(width);
     
 }
 
 
-
-
-// numbers.forEach((e) => {
-//     console.log(e);
-// });
 
 
 /**
@@ -148,15 +153,26 @@ function DrawBar(barTitle, titleOptions = 0, barOptions, boxWidth = 80){
  * @param {*} barOptions 
  * @param {*} width 
  */
-function drawWindow(title, titleOptions = 0, barOptions = 0, width = 0){
+function TDDrawWindow(title, titleOptions = 0, barOptions = 0, width = 0){
     
-    DrawBar(title, titleOptions, barOptions, width);
+    TDDrawBar(title, titleOptions, barOptions, width);
 
 
 }
 
 
 
-drawWindow("Dataset from database query", 0, BAR_LOWER_TITLE, 100);
+/**
+ * 
+ * @param {*} data 
+ * @param {*} headerTitle 
+ * @param {*} windowType 
+ * @param {*} winOptions 
+ */
+function TDDraw(data, headerTitle = "", windowType = 0, winOptions = 0){
+
+}
+
+TDDrawWindow("Dataset from database query", 0, BAR_LOWER_TITLE, 100);
 
 
